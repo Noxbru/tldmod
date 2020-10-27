@@ -2451,10 +2451,8 @@ scripts = [
 			##         (assign, ":cancel_attack", 0),
 			(party_collect_attachments_to_party, ":root_defender_party", "p_collective_ally"),
 			(party_collect_attachments_to_party, ":root_attacker_party", "p_collective_enemy"),
-			#          (call_script, "script_party_count_fit_for_battle", "p_collective_ally"),
 			(call_script, "script_party_calculate_strength", "p_collective_ally", 0),
 			(assign, ":defender_strength", reg0),
-			#           (call_script, "script_party_count_fit_for_battle", "p_collective_enemy"),
 			(call_script, "script_party_calculate_strength", "p_collective_enemy", 0),
 			(assign, ":attacker_strength", reg0),
 			(store_div, ":defender_strength", ":defender_strength", 20),
@@ -2475,8 +2473,8 @@ scripts = [
 				(val_div, ":attacker_strength", 2),
           	(try_end),
 
-	        (call_script, "script_party_count_fit_for_battle", "p_collective_ally", 0),
-          	(assign, ":old_defender_strength", reg0),
+            (call_script, "script_party_calculate_strength", "p_collective_ally", 0),
+            (assign, ":old_defender_strength", reg0),
 			
 			(try_begin),
 				# night in TLD is primary WAR TIME =)! GA
@@ -2484,7 +2482,7 @@ scripts = [
 				(inflict_casualties_to_party_group, ":root_attacker_party", ":defender_strength", "p_temp_casualties"),
 				(party_collect_attachments_to_party, ":root_attacker_party", "p_collective_enemy"),
 			(try_end),
-			(call_script, "script_party_count_fit_for_battle", "p_collective_enemy", 0),
+			(call_script, "script_party_calculate_strength", "p_collective_enemy", 0),
 			(assign, ":new_attacker_strength", reg0),
 
 			(try_begin),
@@ -2494,7 +2492,7 @@ scripts = [
 				(inflict_casualties_to_party_group, ":root_defender_party", ":attacker_strength", "p_temp_casualties"),
 				(party_collect_attachments_to_party, ":root_defender_party", "p_collective_ally"),
 			(try_end),
-			(call_script, "script_party_count_fit_for_battle", "p_collective_ally", 0),
+			(call_script, "script_party_calculate_strength", "p_collective_ally", 0),
 			(assign, ":new_defender_strength", reg0),
 
 			(try_begin),
