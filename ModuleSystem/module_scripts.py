@@ -7479,41 +7479,6 @@ scripts = [
             (assign, ":result", ":quest_no"),
             (assign, ":quest_expiration_days", 40),
           (try_end),
-##        (else_try),
-##          (eq, ":quest_no", "qst_bring_prisoners_to_enemy"),
-##          (try_begin),
-##            (gt, ":player_level", 10),
-##            (is_between, ":giver_center_no", centers_begin, centers_end),#Skip if the quest giver is not at a center
-##            (store_random_in_range, ":random_no", 5, 11),
-##            (troops_can_join_as_prisoner, ":random_no"),#Skip if the player doesn't have enough room
-##            (call_script, "script_get_random_enemy_town", ":giver_center_no"),
-##            (assign, ":cur_target_center", reg0),
-##            (ge, ":cur_target_center", 0),#Skip if there are no enemy towns
-##            (store_faction_of_party, ":cur_target_faction", ":cur_target_center"),
-##            (faction_get_slot, ":cur_object_troop", ":cur_target_faction", slot_faction_tier_5_troop),
-##            (assign, ":quest_target_center", ":cur_target_center"),
-##            (assign, ":quest_object_troop", ":cur_object_troop"),
-##            (assign, ":quest_target_amount", ":random_no"),
-##            (assign, ":quest_importance", 1),
-##            (assign, ":quest_xp_reward", 300),
-##            (assign, ":quest_gold_reward", 200),
-##            (assign, ":result", ":quest_no"),
-##          (try_end),
-
-	# (else_try), #GA: quest to defend refugees caravan from raiders
-		# (eq, ":quest_no", "qst_deal_with_bandits_at_lords_village"),
-		# (faction_slot_eq, ":giver_faction_no", slot_faction_side, faction_side_good),
-		# (neg|is_between, ":giver_faction_no", fac_lorien,fac_dale), #elves and dwarves do not give such quests
-		# (neq, ":giver_faction_no", fac_dwarf),
-		# (ge, "$g_talk_troop_faction_relation", 0),
-		# (ge, ":player_level", 5),
-		# (gt, ":giver_center_no", 0),#Skip if lord is outside the center
-		# (eq, "$g_defending_against_siege", 0),#Skip if the center is under siege (because of resting)
-
-		# (assign, ":quest_target_party", ":cur_target_center"),
-		# (assign, ":result", ":quest_no"),
-		# (assign, ":quest_expiration_days", 1),
- 
         (else_try),
           (eq, ":quest_no", "qst_raise_troops"),
           (try_begin),
