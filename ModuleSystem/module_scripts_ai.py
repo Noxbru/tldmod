@@ -97,26 +97,11 @@ ai_scripts = [
        (faction_get_slot, ":old_faction_ai_last_offensive_time", ":faction_no", slot_faction_ai_last_offensive_time),
        (faction_get_slot, ":faction_theater", ":faction_no", slot_faction_active_theater), #TLD
        (faction_get_slot, ":faction_strength", ":faction_no", slot_faction_strength), #TLD
+       (faction_get_slot, ":faction_marshall", ":faction_no", slot_faction_marshall),
        
        (assign, ":faction_marshall_party", -1),
        (assign, ":faction_marshall_army_strength", 1),#0 might cause division by zero problems
        (assign, ":faction_marshall_num_followers", 1),
-# TLD no change of marshall
-#       (call_script, "script_select_faction_marshall", ":faction_no"),
-#       (assign, ":faction_marshall", reg0),
-#       (assign, ":marshall_changed", 0),
-#       (try_begin),
-#         (neg|faction_slot_eq, ":faction_no", slot_faction_marshall, ":faction_marshall"),
-#         (assign, ":marshall_changed", 1),
-#         (eq, "$players_kingdom", ":faction_no"),
-#         (str_store_troop_name, s1, ":faction_marshall"),
-#         (str_store_faction_name, s2, ":faction_no"),
-#         (display_message, "@{s1} is the new marshall of {s2}."),
-#         (call_script, "script_check_and_finish_active_army_quests_for_faction", ":faction_no"),
-#       (try_end),
-#       (faction_set_slot, ":faction_no", slot_faction_marshall, ":faction_marshall"),
-        (faction_get_slot, ":faction_marshall", ":faction_no", slot_faction_marshall),
-        (assign, ":marshall_changed", 0),
        (try_begin),
          (gt, ":faction_marshall", 0),
          (troop_get_slot, ":faction_marshall_party", ":faction_marshall", slot_troop_leaded_party), 
@@ -183,8 +168,6 @@ ai_scripts = [
          #else, keep it as 0
        (else_try),
          (store_div, ":chance_defend", ":offensive_hours", 10),
-         (store_mul, ":marshall_change_effect", ":marshall_changed", 300),
-         (val_add, ":chance_defend", ":marshall_change_effect"),
        (try_end),
 		## Gathering army
        (try_begin),
