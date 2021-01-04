@@ -322,6 +322,7 @@ scripts = [
 		(faction_set_slot, "fac_mordor", slot_faction_respoint, ":rp"),	
 	(try_end),
 
+	(neq, "$g_fast_mode", 1),
 	(str_store_faction_name, s0, ":fac"),
 	(try_begin),(gt, ":diff", 0),
 		(assign, reg0, ":diff"),
@@ -411,13 +412,17 @@ scripts = [
 		(call_script, "script_get_faction_rank", ":fac"),
 		(assign, ":rank", reg0),
 		(gt, ":rank", 0),
-		(call_script, "script_get_rank_title_to_s24", ":fac"),
-		(neq, "$g_fast_mode", 1), 
-		(display_message, "@{s24}:"),
 		(store_mul, ":income", ":rank", ":rank"), 
 		(store_mul, ":rank10", ":rank", 10), 
 		(val_mul, ":income", 5),  #  ( rank^2 *5 +rank * 10) =  0,  15 , 30, 55, 90 , 135, 190, 255, ... per day.
 		(val_add, ":income", ":rank10"),
+
+		(try_begin),
+			(neq, "$g_fast_mode", 1),
+			(call_script, "script_get_rank_title_to_s24", ":fac"),
+			(display_message, "@{s24}:"),
+		(try_end),
+
 		(call_script, "script_add_faction_rps", ":fac", ":income"),
 	(try_end),
 ]),
